@@ -2,12 +2,7 @@ function inputValueInt(elementId){
     const element = document.getElementById(elementId);
     const elementValueString = element.value;
     const elementValueNumber = parseFloat(elementValueString);
-    if(isNaN(elementValueNumber)){
-        alert('Enter a valid number')
-        element.value = '';
-        return
-    }
-    return elementValueNumber;
+    return elementValueNumber; 
 }
 
 document.getElementById('btn-calculate').addEventListener('click', function(){
@@ -15,11 +10,17 @@ document.getElementById('btn-calculate').addEventListener('click', function(){
    const food = inputValueInt('food')
    const rent = inputValueInt('rent')
    const clothes = inputValueInt('clothes')
+   if(isNaN(income) || isNaN(food) || isNaN(rent) || isNaN(clothes) ){
+    document.getElementById('income').value = '';
+    document.getElementById('food').value = '';
+    document.getElementById('rent').value = '';
+    document.getElementById('clothes').value = '';
+    alert('Enter a valid number')
+    return
+}
    const totalExpensesElement = document.getElementById('total-expenses');
    const totalExpenses = food + rent + clothes;
    
-   
-
    const balanceElement = document.getElementById('balance');
    const balance = income - totalExpenses;
    if(balance < 0){
@@ -38,7 +39,7 @@ document.getElementById('btn-save').addEventListener('click', function(){
     const remainingBalance = document.getElementById('remaining-balance')
     const totalSavings = (income / 100) * savePercent;
     if(isNaN(totalSavings)){
-        alert('Not Enough balance to save')
+        alert('Enter a valid Number')
         return
     }
     const balance = document.getElementById('balance');
